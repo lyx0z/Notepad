@@ -5,29 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notepad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="400">
-        <StackPanel Background="#283142">
+        WindowStyle="SingleBorderWindow"
+        Title="MainWindow" Height="600" Width="800">
+        <StackPanel Background="#3e3e42">
                 <!--MENU-->
-                <DockPanel>
-                        <Menu Background="#191e29" DockPanel.Dock="Top">
-                                <MenuItem Header="File" Foreground="AliceBlue">
-                                        <MenuItem Header="New" Background="#191e29" Click="MenuItem_New_Click"></MenuItem>
-                                        <MenuItem Header="Save" Background="#191e29" Click="OnSave_Clicked"></MenuItem>
-                                        <MenuItem Header="Save as" Background="#191e29" Click="OnSaveAs_Clicked"></MenuItem>
+                <DockPanel LastChildFill="True">
+                        <Button Name="btn1"
+                                DockPanel.Dock="Right"
+                                Width="30" Height="20"
+                                Content="X"
+                                Foreground="	#F5F5F5"
+                                Background="Red"
+                                Click="OnCloseButton_Clicked" ClickMode="Press"/>
+
+                        <Menu Background="#2d2d30" DockPanel.Dock="Left">
+                                <MenuItem Header="File" Foreground="	#F5F5F5">
+                                        <MenuItem Header="New" Background="#2d2d30" Click="MenuItem_New_Click"/>
+                                        <MenuItem Header="Open" Background="#2d2d30" Click="OnOpenMenuItem_Clicked"/>
+                                        <MenuItem Header="Save" Background="#2d2d30" Click="OnSave_Clicked"/>
+                                        <MenuItem Header="Save as" Background="#2d2d30" Click="OnSaveAs_Clicked"/>
                                 </MenuItem>
                         </Menu>
                 </DockPanel>
-                
+
                 <!--INPUT-->
                 <TextBox
                         Name="Editor"
                         TextWrapping="Wrap"
                         AcceptsReturn="True"
-                        VerticalScrollBarVisibility="Visible"
-                        Background="#283142"
-                        Foreground="AliceBlue"
-                        BorderThickness="0"
-                >
+                        VerticalScrollBarVisibility="Hidden"
+                        Background="#3e3e42"
+                        Foreground="	#F5F5F5"
+                        BorderThickness="0">
                 </TextBox>
         </StackPanel>
 </Window>
