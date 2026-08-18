@@ -43,7 +43,7 @@ public partial class MainWindow : Window
         {
             currentFilePath = dlg.FileName;
             string openFilePath = dlg.FileName;
-            File.Open(openFilePath, FileMode.Open);
+            Editor.Text = File.ReadAllText(currentFilePath);
         }
     }
 
