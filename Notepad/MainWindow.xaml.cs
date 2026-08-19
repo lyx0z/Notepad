@@ -35,15 +35,15 @@ public partial class MainWindow : Window
 
     private void OnOpenMenuItem_Clicked(object sender, RoutedEventArgs e)
     {
-        Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+        var dlg = new Microsoft.Win32.OpenFileDialog();
         dlg.DefaultExt = ".txt";
         dlg.Filter = "Text documents (.txt)|*.txt";
-        bool? result = dlg.ShowDialog();
+        var result = dlg.ShowDialog();
         if (result == true)
         {
             currentFilePath = dlg.FileName;
-            string openFilePath = dlg.FileName;
-            File.Open(openFilePath, FileMode.Open);
+            var openFilePath = dlg.FileName;
+            Editor.Text = File.ReadAllText(currentFilePath);
         }
     }
 
@@ -58,11 +58,11 @@ public partial class MainWindow : Window
         {
             FileName = "Document", DefaultExt = ".txt", Filter = "Text documents (.txt)|*.txt"
         };
-        bool? result = dialog.ShowDialog();
+        var result = dialog.ShowDialog();
         
         if (result == true)
         {
-            string filePath = dialog.FileName;
+            var filePath = dialog.FileName;
             File.WriteAllText(filePath, Editor.Text);
             currentFilePath = filePath;     
         }
