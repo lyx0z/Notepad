@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using FileUtils;
 using System.IO;
 using System.Windows;
 namespace Notepad;
@@ -8,7 +8,7 @@ namespace Notepad;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private string currentFilePath;
+    private string? currentFilePath;
     public MainWindow()
     {
         InitializeComponent();
@@ -20,51 +20,66 @@ public partial class MainWindow : Window
 
     private void OnSaveAs_Clicked(object sender, RoutedEventArgs e)
     {
-        SaveAs();
+        if (TrySaveAsDialog() == true)
+        {
+            FileUtils.FileUtils.Write(currentFilePath, Editor.Text);
+        }
+    }
+
+    private void OnOpenMenuItem_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (TryOpenMenuItem() == true)
+        {
+            var x = FileUtils.FileUtils.Open(currentFilePath);
+            Editor.Text = x;
+        }
     }
 
     private void OnSave_Clicked(object sender, RoutedEventArgs e)
     {
         if (currentFilePath is null)
         {
-            SaveAs();
+            TrySaveAsDialog();
         }
-        File.WriteAllText(currentFilePath, Editor.Text);
+        FileUtils.FileUtils.Write(currentFilePath, Editor.Text);
         MessageBox.Show("Successfully saved");
     }
-
-    private void OnOpenMenuItem_Clicked(object sender, RoutedEventArgs e)
-    {
-        var dlg = new Microsoft.Win32.OpenFileDialog();
-        dlg.DefaultExt = ".txt";
-        dlg.Filter = "Text documents (.txt)|*.txt";
-        var result = dlg.ShowDialog();
-        if (result == true)
-        {
-            currentFilePath = dlg.FileName;
-            var openFilePath = dlg.FileName;
-            Editor.Text = File.ReadAllText(currentFilePath);
-        }
-    }
-
+    
     private void OnCloseButton_Clicked(object sender, RoutedEventArgs e)
     {
         Environment.Exit(0);
     }
 
-    private void SaveAs()
+    private bool TrySaveAsDialog()
     {
         var dialog = new Microsoft.Win32.SaveFileDialog()
         {
             FileName = "Document", DefaultExt = ".txt", Filter = "Text documents (.txt)|*.txt"
         };
         var result = dialog.ShowDialog();
-        
-        if (result == true)
+
+        if (result != true)
         {
-            var filePath = dialog.FileName;
-            File.WriteAllText(filePath, Editor.Text);
-            currentFilePath = filePath;     
+            return false;
         }
+        currentFilePath = dialog.FileName;
+        return true;
+
+    }
+    
+    private bool TryOpenMenuItem()
+    {
+        var dialog = new Microsoft.Win32.OpenFileDialog()
+        {
+            FileName = "Document", DefaultExt = ".txt", Filter = "Text documents (.txt)|*.txt"
+        };
+        var result = dialog.ShowDialog();
+
+        if (result != true)
+        {
+            return false;
+        }
+        currentFilePath = dialog.FileName;
+        return true;
     }
 }

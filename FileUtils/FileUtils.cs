@@ -1,23 +1,14 @@
-﻿using System.IO;
-using System.Windows;
-using MainWindow.Notepad;
-namespace FileUtils;
+﻿namespace FileUtils;
+ public static class FileUtils
+ {
+     public static void Write(string path, string content)
+     {
+         File.WriteAllText(path, content);
+     }
 
-public class FileUtils
-{
-    private void SaveAs()
-    {
-        var dialog = new Microsoft.Win32.SaveFileDialog()
-        {
-            FileName = "Document", DefaultExt = ".txt", Filter = "Text documents (.txt)|*.txt"
-        };
-        var result = dialog.ShowDialog();
-        
-        if (result == true)
-        {
-            var filePath = dialog.FileName;
-            File.WriteAllText(filePath, Editor.Text);
-            currentFilePath = filePath;     
-        }
-    }
-}
+     public static string Open(string path)
+     {
+         var x = File.ReadAllText(path);
+         return x;
+     }
+ }
