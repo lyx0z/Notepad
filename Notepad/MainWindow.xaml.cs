@@ -54,8 +54,11 @@ public partial class MainWindow : Window
     {
         var dialog = new Microsoft.Win32.SaveFileDialog()
         {
-            FileName = "Document", DefaultExt = ".txt", Filter = "Text documents (.txt)|*.txt"
+            FileName = "Document",
+            DefaultExt = ".txt",
+            Filter = "Text documents (.txt)|*.txt"
         };
+        
         var result = dialog.ShowDialog();
 
         if (result != true)

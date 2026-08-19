@@ -10,16 +10,17 @@
         <StackPanel Background="#3e3e42">
                 <!--MENU-->
                 <DockPanel LastChildFill="True">
-                        <Button Name="btn1"
+                        <Button Name="CloseButton"
                                 DockPanel.Dock="Right"
                                 Width="30" Height="20"
                                 Content="X"
-                                Foreground="	#F5F5F5"
+                                Foreground="#F5F5F5"
                                 Background="Red"
-                                Click="OnCloseButton_Clicked" ClickMode="Press"/>
+                                Click="OnCloseButton_Clicked" 
+                                ClickMode="Press"/>
 
                         <Menu Background="#2d2d30" DockPanel.Dock="Left">
-                                <MenuItem Header="File" Foreground="	#F5F5F5">
+                                <MenuItem Header="File" Foreground="#F5F5F5">
                                         <MenuItem Header="New" Background="#2d2d30" Click="MenuItem_New_Click"/>
                                         <MenuItem Header="Open" Background="#2d2d30" Click="OnOpenMenuItem_Clicked"/>
                                         <MenuItem Header="Save" Background="#2d2d30" Click="OnSave_Clicked"/>
@@ -29,13 +30,12 @@
                 </DockPanel>
 
                 <!--INPUT-->
-                <TextBox
-                        Name="Editor"
+                <TextBox Name="Editor"
                         TextWrapping="Wrap"
                         AcceptsReturn="True"
                         VerticalScrollBarVisibility="Hidden"
                         Background="#3e3e42"
-                        Foreground="	#F5F5F5"
+                        Foreground="#F5F5F5"
                         BorderThickness="0">
                 </TextBox>
         </StackPanel>
