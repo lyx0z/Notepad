@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Notepad;
 
@@ -101,5 +103,29 @@ public partial class MainWindow : Window
         }
         currentFilePath = dialog.FileName;
         return true;
+    }
+
+    private void MenuItemModeLight_OnClick(object sender, RoutedEventArgs e)
+    {
+        StackPanel.Background = Brushes.OldLace;
+        Editor.Background = Brushes.OldLace;
+        DockPanel.Background = Brushes.BurlyWood;
+        Menu.Background = Brushes.BurlyWood;
+        HeaderFile.Foreground = Brushes.Black;
+        HeaderSettings.Foreground = Brushes.Black;
+        Editor.Background = Brushes.OldLace;
+        Editor.Foreground = Brushes.Black;
+    }
+
+    private void MenuItemModeDark_OnClick(object sender, RoutedEventArgs e)
+    {
+        StackPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
+        Editor.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
+        DockPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
+        Menu.Background = (Brush)(new BrushConverter().ConvertFrom("#1e1e1e")!);
+        HeaderFile.Foreground = Brushes.White;
+        HeaderSettings.Foreground = Brushes.White;
+        Editor.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
+        Editor.Foreground = Brushes.White;
     }
 }

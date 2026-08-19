@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         Title="MainWindow" Height="600" Width="800">
-        <StackPanel Background="#3e3e42">
+        <StackPanel Name="StackPanel" Background="#3e3e42">
                 <!--MENU-->
-                <DockPanel LastChildFill="True">
-                        <Button Name="CloseButton"
+                <DockPanel Background="#252526" Name = "DockPanel" LastChildFill="True" Width="Auto">
+                        <Button
                                 DockPanel.Dock="Right"
                                 Width="30" Height="20"
                                 Content="X"
@@ -19,13 +19,19 @@
                                 Click="OnCloseButton_Clicked" 
                                 ClickMode="Press"/>
 
-                        <Menu Background="#2d2d30" DockPanel.Dock="Left">
-                                <MenuItem Header="File" Foreground="#F5F5F5">
+                        <Menu Background = "Black" Name = "Menu" DockPanel.Dock="Left">
+                                <MenuItem Name = "HeaderFile" Header="File" Foreground="#F5F5F5">
                                         <MenuItem Header="New" Background="#2d2d30" Click="MenuItem_New_Click"/>
                                         <MenuItem Header="Open" Background="#2d2d30" Click="OnOpenMenuItem_Clicked"/>
                                         <MenuItem Header="Save" Background="#2d2d30" Click="OnSave_Clicked"/>
                                         <MenuItem Header="Save as" Background="#2d2d30" Click="OnSaveAs_Clicked"/>
                                 </MenuItem>
+                                <MenuItem Name = "HeaderSettings" Header="Settings" Foreground="#F5F5F5">
+                                        <MenuItem Header="Choose Theme" Background="#2d2d30" Foreground="#F5F5F5" >
+                                                <MenuItem Header="Light" Background="#2d2d30" Foreground="#F5F5F5" Click="MenuItemModeLight_OnClick"/>
+                                                <MenuItem Header="Dark" Background="#2d2d30" Foreground="#F5F5F5" Click="MenuItemModeDark_OnClick"/>
+                                        </MenuItem>
+                                </MenuItem>        
                         </Menu>
                 </DockPanel>
 
