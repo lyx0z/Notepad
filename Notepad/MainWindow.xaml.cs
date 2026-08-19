@@ -1,6 +1,5 @@
-﻿using FileUtils;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
+
 namespace Notepad;
 
 /// <summary>
@@ -74,8 +73,11 @@ public partial class MainWindow : Window
     {
         var dialog = new Microsoft.Win32.OpenFileDialog()
         {
-            FileName = "Document", DefaultExt = ".txt", Filter = "Text documents (.txt)|*.txt"
+            FileName = "Document", 
+            DefaultExt = ".txt", 
+            Filter = "Text documents (.txt)|*.txt"
         };
+        
         var result = dialog.ShowDialog();
 
         if (result != true)
