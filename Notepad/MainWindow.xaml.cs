@@ -7,7 +7,7 @@ namespace Notepad;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private string? currentFilePath;
+    private string? _currentFilePath;
     public MainWindow()
     {
         InitializeComponent();
@@ -19,28 +19,43 @@ public partial class MainWindow : Window
 
     private void OnSaveAs_Clicked(object sender, RoutedEventArgs e)
     {
-        if (TrySaveAsDialog() == true)
+        if (ShowSaveAsDialog())
         {
-            FileUtils.FileUtils.Write(currentFilePath, Editor.Text);
+            if (_currentFilePath != null)
+            {
+                FileUtils.FileUtils.WriteSaveFile(_currentFilePath, Editor.Text);
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
     }
 
     private void OnOpenMenuItem_Clicked(object sender, RoutedEventArgs e)
     {
-        if (TryOpenMenuItem() == true)
+        if (ShowOpenDialog())
         {
-            var x = FileUtils.FileUtils.Open(currentFilePath);
-            Editor.Text = x;
+            if (_currentFilePath != null)
+            {
+                var openReadFile = FileUtils.FileUtils.Open(_currentFilePath);
+                Editor.Text = openReadFile;
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
     }
 
     private void OnSave_Clicked(object sender, RoutedEventArgs e)
     {
-        if (currentFilePath is null)
+        if (_currentFilePath is null)
         {
-            TrySaveAsDialog();
+            OnSaveAs_Clicked(sender, e);
+            return;
         }
-        FileUtils.FileUtils.Write(currentFilePath, Editor.Text);
+        FileUtils.FileUtils.WriteSaveFile(_currentFilePath, Editor.Text);
         MessageBox.Show("Successfully saved");
     }
     
@@ -49,7 +64,7 @@ public partial class MainWindow : Window
         Environment.Exit(0);
     }
 
-    private bool TrySaveAsDialog()
+    private bool ShowSaveAsDialog()
     {
         var dialog = new Microsoft.Win32.SaveFileDialog()
         {
@@ -64,12 +79,12 @@ public partial class MainWindow : Window
         {
             return false;
         }
-        currentFilePath = dialog.FileName;
+        _currentFilePath = dialog.FileName;
         return true;
 
     }
     
-    private bool TryOpenMenuItem()
+    private bool ShowOpenDialog()
     {
         var dialog = new Microsoft.Win32.OpenFileDialog()
         {
@@ -84,7 +99,7 @@ public partial class MainWindow : Window
         {
             return false;
         }
-        currentFilePath = dialog.FileName;
+        _currentFilePath = dialog.FileName;
         return true;
     }
 }
