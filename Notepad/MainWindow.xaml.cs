@@ -7,7 +7,7 @@ namespace Notepad;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private string? _currentFilePath;
+    private string? currentFilePath;
     public MainWindow()
     {
         InitializeComponent();
@@ -21,9 +21,9 @@ public partial class MainWindow : Window
     {
         if (ShowSaveAsDialog())
         {
-            if (_currentFilePath != null)
+            if (currentFilePath != null)
             {
-                FileUtils.FileUtils.WriteSaveFile(_currentFilePath, Editor.Text);
+                FileUtils.FileUtils.Save(currentFilePath, Editor.Text);
             }
             else
             {
@@ -36,9 +36,9 @@ public partial class MainWindow : Window
     {
         if (ShowOpenDialog())
         {
-            if (_currentFilePath != null)
+            if (currentFilePath != null)
             {
-                var openReadFile = FileUtils.FileUtils.Open(_currentFilePath);
+                var openReadFile = FileUtils.FileUtils.Open(currentFilePath);
                 Editor.Text = openReadFile;
             }
             else
@@ -50,12 +50,12 @@ public partial class MainWindow : Window
 
     private void OnSave_Clicked(object sender, RoutedEventArgs e)
     {
-        if (_currentFilePath is null)
+        if (currentFilePath is null)
         {
             OnSaveAs_Clicked(sender, e);
             return;
         }
-        FileUtils.FileUtils.WriteSaveFile(_currentFilePath, Editor.Text);
+        FileUtils.FileUtils.Save(currentFilePath, Editor.Text);
         MessageBox.Show("Successfully saved");
     }
     
@@ -79,7 +79,7 @@ public partial class MainWindow : Window
         {
             return false;
         }
-        _currentFilePath = dialog.FileName;
+        currentFilePath = dialog.FileName;
         return true;
 
     }
@@ -99,7 +99,7 @@ public partial class MainWindow : Window
         {
             return false;
         }
-        _currentFilePath = dialog.FileName;
+        currentFilePath = dialog.FileName;
         return true;
     }
 }
