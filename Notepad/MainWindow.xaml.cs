@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Notepad;
 
@@ -8,10 +10,12 @@ namespace Notepad;
 public partial class MainWindow : Window
 {
     private string? currentFilePath;
+
     public MainWindow()
     {
         InitializeComponent();
     }
+
     private void MenuItem_New_Click(object sender, RoutedEventArgs e)
     {
         Editor.Clear();
@@ -58,7 +62,7 @@ public partial class MainWindow : Window
         FileUtils.FileUtils.Save(currentFilePath, Editor.Text);
         MessageBox.Show("Successfully saved");
     }
-    
+
     private void OnCloseButton_Clicked(object sender, RoutedEventArgs e)
     {
         Environment.Exit(0);
@@ -70,9 +74,9 @@ public partial class MainWindow : Window
         {
             FileName = "Document",
             DefaultExt = ".txt",
-            Filter = "Text documents (.txt)|*.txt"
+            Filter = "Text documents (.txt)|*.txt",
         };
-        
+
         var result = dialog.ShowDialog();
 
         if (result != true)
@@ -81,18 +85,17 @@ public partial class MainWindow : Window
         }
         currentFilePath = dialog.FileName;
         return true;
-
     }
-    
+
     private bool ShowOpenDialog()
     {
         var dialog = new Microsoft.Win32.OpenFileDialog()
         {
-            FileName = "Document", 
-            DefaultExt = ".txt", 
-            Filter = "Text documents (.txt)|*.txt"
+            FileName = "Document",
+            DefaultExt = ".txt",
+            Filter = "Text documents (.txt)|*.txt",
         };
-        
+
         var result = dialog.ShowDialog();
 
         if (result != true)
@@ -101,5 +104,26 @@ public partial class MainWindow : Window
         }
         currentFilePath = dialog.FileName;
         return true;
+    }
+
+    private void MenuItemModeLight_OnClick(object sender, RoutedEventArgs e)
+    {
+        SetTheme(Theme.Light);
+    }
+
+    private void MenuItemModeDark_OnClick(object sender, RoutedEventArgs e)
+    {
+        SetTheme(Theme.Dark);
+    }
+
+    private void SetTheme(Theme theme)
+    {
+        StackPanel.Background = theme.StackPanelBackground;
+        DockPanel.Background = theme.DockPanelBackground;
+        Menu.Background = theme.MenuBackground;
+        HeaderFile.Foreground = theme.HeaderFileForeground;
+        HeaderSettings.Foreground = theme.HeaderSettingsForeground;
+        Editor.Background = theme.EditorBackground;
+        Editor.Foreground = theme.EditorForeground;
     }
 }
