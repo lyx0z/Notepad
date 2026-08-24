@@ -108,7 +108,6 @@ public partial class MainWindow : Window
     private void MenuItemModeLight_OnClick(object sender, RoutedEventArgs e)
     {
         StackPanel.Background = Brushes.OldLace;
-        Editor.Background = Brushes.OldLace;
         DockPanel.Background = Brushes.BurlyWood;
         Menu.Background = Brushes.BurlyWood;
         HeaderFile.Foreground = Brushes.Black;
@@ -120,7 +119,6 @@ public partial class MainWindow : Window
     private void MenuItemModeDark_OnClick(object sender, RoutedEventArgs e)
     {
         StackPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
-        Editor.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
         DockPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
         Menu.Background = (Brush)(new BrushConverter().ConvertFrom("#1e1e1e")!);
         HeaderFile.Foreground = Brushes.White;
