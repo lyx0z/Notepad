@@ -108,23 +108,22 @@ public partial class MainWindow : Window
 
     private void MenuItemModeLight_OnClick(object sender, RoutedEventArgs e)
     {
-        StackPanel.Background = Brushes.OldLace;
-        DockPanel.Background = Brushes.BurlyWood;
-        Menu.Background = Brushes.BurlyWood;
-        HeaderFile.Foreground = Brushes.Black;
-        HeaderSettings.Foreground = Brushes.Black;
-        Editor.Background = Brushes.OldLace;
-        Editor.Foreground = Brushes.Black;
+        SetTheme(Theme.Light);
     }
 
     private void MenuItemModeDark_OnClick(object sender, RoutedEventArgs e)
     {
-        StackPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
-        DockPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
-        Menu.Background = (Brush)(new BrushConverter().ConvertFrom("#1e1e1e")!);
-        HeaderFile.Foreground = Brushes.White;
-        HeaderSettings.Foreground = Brushes.White;
-        Editor.Background = (Brush)(new BrushConverter().ConvertFrom("#3e3e42")!);
-        Editor.Foreground = Brushes.White;
+        SetTheme(Theme.Dark);
+    }
+
+    private void SetTheme(Theme theme)
+    {
+        StackPanel.Background = theme.StackPanelBackground;
+        DockPanel.Background = theme.DockPanelBackground;
+        Menu.Background = theme.MenuBackground;
+        HeaderFile.Foreground = theme.HeaderFileForeground;
+        HeaderSettings.Foreground = theme.HeaderSettingsForeground;
+        Editor.Background = theme.EditorBackground;
+        Editor.Foreground = theme.EditorForeground;
     }
 }
